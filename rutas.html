@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rutas y Destinos - Transportes Cóndor</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="logo-container">
+        <span class="logo-icon">🦅</span>
+        <div class="logo-text">
+          <h1>Transportes Cóndor</h1>
+          <span>Cobertura Nacional</span>
+        </div>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="rutas.html" class="active">Rutas</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="mision-vision.html">Misión y Visión</a></li>
+          <li><a href="registro.html">Registro</a></li>
+          <li><a href="login.html">Iniciar Sesión</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h2>🌏 Rutas y Cobertura Destacada</h2>
+      <p>Llegamos a donde otros no llegan. Haz clic en cualquiera de nuestras ciudades para consultar los puntos de venta y agencias disponibles.</p>
+    </section>
+
+    <div class="routes-grid">
+      <!-- Rutas Nacionales -->
+      <div class="card">
+        <h3>🏙️ Rutas Nacionales Principales</h3>
+        <p style="margin-bottom: 1rem;">Haz clic en tu ciudad para ver puntos de recepción y entrega:</p>
+        <ul class="city-list">
+          <li class="city-item" onclick="showPointOfSale('Cúcuta')"><span>Cúcuta</span> ➔</li>
+          <li class="city-item" onclick="showPointOfSale('Bogotá')"><span>Bogotá</span> ➔</li>
+          <li class="city-item" onclick="showPointOfSale('Medellín')"><span>Medellín</span> ➔</li>
+          <li class="city-item" onclick="showPointOfSale('Cali')"><span>Cali</span> ➔</li>
+          <li class="city-item" onclick="showPointOfSale('Bucaramanga')"><span>Bucaramanga</span> ➔</li>
+          <li class="city-item" onclick="showPointOfSale('Cartagena')"><span>Cartagena</span> ➔</li>
+          <li class="city-item" onclick="showPointOfSale('Barranquilla')"><span>Barranquilla</span> ➔</li>
+          <li class="city-item" onclick="showPointOfSale('Santa Marta')"><span>Santa Marta</span> ➔</li>
+          <li class="city-item" onclick="showPointOfSale('Pereira')"><span>Pereira</span> ➔</li>
+        </ul>
+      </div>
+
+      <!-- Rutas Municipales y Rurales -->
+      <div class="card">
+        <h3>🛤️ Rutas Municipales y Rurales</h3>
+        <p style="margin-bottom: 1rem;">Conectando comunidades y municipios intermedios:</p>
+        <ul class="city-list">
+          <li class="city-item" onclick="showPointOfSale('Mompox')"><span>Mompox</span> ➔</li>
+          <li class="city-item" onclick="showPointOfSale('Ocaña')"><span>Ocaña</span> ➔</li>
+          <li class="city-item" onclick="showPointOfSale('Pamplona')"><span>Pamplona</span> ➔</li>
+          <li class="city-item" onclick="showPointOfSale('Tibú')"><span>Tibú</span> ➔</li>
+          <li class="city-item" onclick="showPointOfSale('San Gil')"><span>San Gil</span> ➔</li>
+          <li class="city-item" onclick="showPointOfSale('Girón')"><span>Girón</span> ➔</li>
+          <li class="city-item" onclick="showPointOfSale('Aguachica')"><span>Aguachica</span> ➔</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal Puntos de Venta -->
+  <div id="cityModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal()">&times;</span>
+      <h3 id="modalTitle" style="color: var(--primary-color); margin-bottom: 1rem;">Punto de Venta</h3>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Transportes Cóndor. Todos los derechos reservados.</p>
+  </footer>
+
+</body>
+</html>

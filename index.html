@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transportes Cóndor - Inicio y Rastreo</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/x-icon" href="images/logo.png">
+  <script src="js/main.js" defer></script>
+  <script src="js/nuevo-envio.js" defer></script>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="logo-container">
+        <span class="logo-icon">🦅</span>
+        <div class="logo-text">
+          <h1>Transportes Cóndor</h1>
+          <span>Logística Nacional e Internacional</span>
+        </div>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="index.html" class="active">Inicio</a></li>
+          <li><a href="rutas.html">Rutas</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="mision-vision.html">Misión y Visión</a></li>
+          <li><a href="registro.html">Registro</a></li>
+          <li><a href="login.html">Iniciar Sesión</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h2>¡Conectamos Destinos, Entregamos Confianza!</h2>
+      <p>Con una flota moderna y la mejor cobertura nacional, garantizamos la llegada segura de tu carga y mensajería a cualquier rincón del país.</p>
+    </section>
+
+    <!-- Rastreo de Envío Directo -->
+    <section class="card" style="margin-bottom: 2.5rem;">
+      <h3>🔍 Rastrea tu Envío</h3>
+      <p>Ingresa el número de guía para conocer el estado en tiempo real de tu paquete.</p>
+      <form id="rastreoForm" style="display: flex; gap: 10px; margin-top: 1rem; flex-wrap: wrap;">
+        <input type="text" id="guiaInput" placeholder="Ej: TC-1001" style="flex: 1; min-width: 200px; padding: 10px; border-radius: 6px; border: 1px solid #ccc;" required>
+        <button type="submit" class="btn-secondary">Buscar Guía</button>
+      </form>
+      <div id="trackingResult"></div>
+    </section>
+
+    <!-- Crear Envío y Calculadora -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+      
+      <!-- Crear nuevo envío -->
+      <section class="card">
+        <h3>📦 Crear Nuevo Envío</h3>
+        <form id="envioForm" style="margin-top: 1rem;">
+          <div class="form-group">
+            <label for="origen">Origen:</label>
+            <input type="text" id="origen" placeholder="Ej. Cúcuta" required>
+          </div>
+          <div class="form-group">
+            <label for="destino">Destino:</label>
+            <input type="text" id="destino" placeholder="Ej. Bogotá" required>
+          </div>
+          <div class="form-group">
+            <label for="peso">Peso (kg):</label>
+            <input type="number" id="peso" step="0.1" placeholder="Ej. 2.5" required>
+          </div>
+          <div class="form-group">
+            <label for="dimensiones">Dimensiones (cm):</label>
+            <input type="text" id="dimensiones" placeholder="Ej. 30x20x15" required>
+          </div>
+          <div class="form-group">
+            <label for="servicio">Tipo de servicio:</label>
+            <select id="servicio" required>
+              <option value="paqueteo">Paqueteo</option>
+              <option value="mensajeria">Mensajería Express</option>
+              <option value="masivo">Carga Masiva</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-primary">Generar Guía de Envío</button>
+        </form>
+        <div id="resultado"></div>
+      </section>
+
+      <!-- Calculadora de tarifa -->
+      <section class="card">
+        <h3>🧮 Calculadora de Tarifas</h3>
+        <p>Calcula un presupuesto estimado para tu envío en segundos.</p>
+        <form id="calculoForm" style="margin-top: 1rem;">
+          <div class="form-group">
+            <label for="calc-peso">Peso Estimado (kg):</label>
+            <input type="number" id="calc-peso" step="0.1" placeholder="Ej. 5.0" required>
+          </div>
+          <div class="form-group">
+            <label for="calc-servicio">Tipo de Servicio:</label>
+            <select id="calc-servicio" required>
+              <option value="estandar">Estándar Nacional</option>
+              <option value="expres">Express Prioritario</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-primary" style="background-color: var(--dark-color);">Calcular Costo</button>
+        </form>
+        <div id="resultadoCosto"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Transportes Cóndor. Todos los derechos reservados.</p>
+    <p>Contacto: info@transportescondor.com | Cúcuta, Colombia</p>
+  </footer>
+
+</body>
+</html>

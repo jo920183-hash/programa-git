@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Usuarios - Transportes Cóndor</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="logo-container">
+        <span class="logo-icon">🦅</span>
+        <div class="logo-text">
+          <h1>Transportes Cóndor</h1>
+          <span>Crear Cuenta</span>
+        </div>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="rutas.html">Rutas</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="mision-vision.html">Misión y Visión</a></li>
+          <li><a href="registro.html" class="active">Registro</a></li>
+          <li><a href="login.html">Iniciar Sesión</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="form-container">
+      <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 1.5rem;">📝 Registro de Usuarios</h2>
+      <form id="registroForm">
+        <div class="form-group">
+          <label for="nombre">Nombre Completo:</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre y apellidos" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Correo Electrónico:</label>
+          <input type="email" id="email" name="email" placeholder="correo@ejemplo.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="tipo_documento">Tipo de Documento:</label>
+          <select name="tipo_documento" id="tipo_documento" required>
+            <option value="">Seleccione...</option>
+            <option value="C.C.">Cédula de Ciudadanía (C.C.)</option>
+            <option value="Pasaporte">Pasaporte</option>
+            <option value="C.E.">Cédula de Extranjería (C.E.)</option>
+            <option value="PPT">Permiso de Protección Temporal (PPT)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="numero_documento">Número de Documento:</label>
+          <input type="text" id="numero_documento" name="numero_documento" placeholder="Número de identificación" required>
+        </div>
+
+        <div class="form-group">
+          <label for="fecha">Fecha de Nacimiento:</label>
+          <input type="date" id="fecha" name="fecha" required>
+        </div>
+
+        <button type="submit" class="btn-primary">Registrarse</button>
+      </form>
+      <div id="registroAlert" class="alert alert-success">
+        ¡Registro completado exitosamente! Ahora puede <a href="login.html">Iniciar Sesión</a>.
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('registroForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('registroAlert').style.display = 'block';
+      this.reset();
+    });
+  </script>
+
+  <footer>
+    <p>&copy; 2026 Transportes Cóndor. Todos los derechos reservados.</p>
+  </footer>
+
+</body>
+</html>
