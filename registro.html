@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <script src="js/main.js" defer></script>
 </head>
+
 <body>
 
   <header>
@@ -34,6 +36,7 @@
   <main>
     <div class="form-container">
       <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 1.5rem;">📝 Registro de Usuarios</h2>
+
       <form id="registroForm">
         <div class="form-group">
           <label for="nombre">Nombre Completo:</label>
@@ -58,7 +61,8 @@
 
         <div class="form-group">
           <label for="numero_documento">Número de Documento:</label>
-          <input type="text" id="numero_documento" name="numero_documento" placeholder="Número de identificación" required>
+          <input type="text" id="numero_documento" name="numero_documento" placeholder="Número de identificación"
+            required>
         </div>
 
         <div class="form-group">
@@ -66,25 +70,22 @@
           <input type="date" id="fecha" name="fecha" required>
         </div>
 
+        <div class="form-group">
+          <label for="password">Contraseña:</label>
+          <input type="password" id="password" name="password" placeholder="Cree su contraseña" required>
+        </div>
+
         <button type="submit" class="btn-primary">Registrarse</button>
       </form>
-      <div id="registroAlert" class="alert alert-success">
-        ¡Registro completado exitosamente! Ahora puede <a href="login.html">Iniciar Sesión</a>.
-      </div>
+
+      <div id="registroAlert" class="alert alert-success" style="display: none; margin-top: 15px;"></div>
     </div>
   </main>
-
-  <script>
-    document.getElementById('registroForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      document.getElementById('registroAlert').style.display = 'block';
-      this.reset();
-    });
-  </script>
 
   <footer>
     <p>&copy; 2026 Transportes Cóndor. Todos los derechos reservados.</p>
   </footer>
 
 </body>
+
 </html>

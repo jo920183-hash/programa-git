@@ -1,49 +1,82 @@
 // Transportes Cóndor - Core App Logic
 
-// LocalStorage Shipping Management
-const Storage = {
-  getShipments: () => JSON.parse(localStorage.getItem('condor_envios')) || [],
-  saveShipment: (shipment) => {
-    const shipments = Storage.getShipments();
-    shipments.push(shipment);
-    localStorage.setItem('condor_envios', JSON.stringify(shipments));
-  },
-  findShipment: (guideNumber) => {
-    const shipments = Storage.getShipments();
-    return shipments.find(s => s.guia.toUpperCase() === guideNumber.toUpperCase());
+document.addEventListener('DOMContentLoaded', () => {
+
+  // ==========================================
+  // 1. REGISTRO DE USUARIOS (Conexión a PHP)
+  // ==========================================
+  const registroForm = document.getElementById('registroForm');
+  const registroAlert = document.getElementById('registroAlert');
+
+  if (registroForm) {
+    registroForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(registroForm);
+
+      try {
+        const response = await fetch('procesar_registro.php', {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.json();
+
+        if (registroAlert) {
+          registroAlert.style.display = 'block';
+          registroAlert.textContent = result.message;
+
+          if (result.success) {
+            registroAlert.className = 'alert alert-success';
+            registroForm.reset();
+          } else {
+            registroAlert.className = 'alert alert-danger';
+          }
+        }
+      } catch (error) {
+        console.error('Error en el registro:', error);
+        if (registroAlert) {
+          registroAlert.style.display = 'block';
+          registroAlert.className = 'alert alert-danger';
+          registroAlert.textContent = 'Ocurrió un error al procesar la solicitud. Revisa la consola o conexión BD.';
+        }
+      }
+    });
   }
-};
 
-// Seed initial mock shipments if empty
-if (Storage.getShipments().length === 0) {
-  const initialShipments = [
-    {
-      guia: "TC-1001",
-      origen: "Cúcuta",
-      destino: "Bogotá",
-      peso: 5,
-      dimensiones: "30x20x15",
-      servicio: "paqueteo",
-      costo: 35000,
-      estado: "En Tránsito",
-      fecha: "2026-08-19"
-    },
-    {
-      guia: "TC-1002",
-      origen: "Medellín",
-      destino: "Cali",
-      peso: 12,
-      dimensiones: "40x40x30",
-      servicio: "masivo",
-      costo: 78000,
-      estado: "Entregado",
-      fecha: "2026-08-18"
-    }
-  ];
-  localStorage.setItem('condor_envios', JSON.stringify(initialShipments));
-}
+  // ==========================================
+  // 2. INICIO DE SESIÓN (Conexión a PHP)
+  // ==========================================
+  const loginForm = document.getElementById('loginForm');
+  if (loginForm) {
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-// Modal handling for Points of Sale
+      const formData = new FormData(loginForm);
+
+      try {
+        const response = await fetch('procesar_login.php', {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.json();
+
+        alert(result.message);
+        if (result.success) {
+          window.location.href = 'index.html';
+        }
+      } catch (error) {
+        console.error('Error en el login:', error);
+      }
+    });
+  }
+
+});
+
+// ==========================================
+// 3. MODALES DE PUNTOS DE VENTA (Rutas)
+// ==========================================
 function showPointOfSale(city) {
   const modal = document.getElementById('cityModal');
   const modalTitle = document.getElementById('modalTitle');
@@ -66,7 +99,7 @@ function closeModal() {
   if (modal) modal.style.display = 'none';
 }
 
-// Close modal when clicking outside
+// Cerrar modal al hacer clic fuera del contenido
 window.onclick = function(event) {
   const modal = document.getElementById('cityModal');
   if (event.target === modal) {

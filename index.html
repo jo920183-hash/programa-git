@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
   <script src="js/main.js" defer></script>
   <script src="js/nuevo-envio.js" defer></script>
 </head>
+
 <body>
 
   <header>
@@ -36,7 +38,8 @@
   <main>
     <section class="hero">
       <h2>¡Conectamos Destinos, Entregamos Confianza!</h2>
-      <p>Con una flota moderna y la mejor cobertura nacional, garantizamos la llegada segura de tu carga y mensajería a cualquier rincón del país.</p>
+      <p>Con una flota moderna y la mejor cobertura nacional, garantizamos la llegada segura de tu carga y mensajería a
+        cualquier rincón del país.</p>
     </section>
 
     <!-- Rastreo de Envío Directo -->
@@ -44,7 +47,8 @@
       <h3>🔍 Rastrea tu Envío</h3>
       <p>Ingresa el número de guía para conocer el estado en tiempo real de tu paquete.</p>
       <form id="rastreoForm" style="display: flex; gap: 10px; margin-top: 1rem; flex-wrap: wrap;">
-        <input type="text" id="guiaInput" placeholder="Ej: TC-1001" style="flex: 1; min-width: 200px; padding: 10px; border-radius: 6px; border: 1px solid #ccc;" required>
+        <input type="text" id="guiaInput" name="guiaInput" placeholder="Ej: TC-1001"
+          style="flex: 1; min-width: 200px; padding: 10px; border-radius: 6px; border: 1px solid #ccc;" required>
         <button type="submit" class="btn-secondary">Buscar Guía</button>
       </form>
       <div id="trackingResult"></div>
@@ -52,30 +56,30 @@
 
     <!-- Crear Envío y Calculadora -->
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
-      
+
       <!-- Crear nuevo envío -->
       <section class="card">
         <h3>📦 Crear Nuevo Envío</h3>
         <form id="envioForm" style="margin-top: 1rem;">
           <div class="form-group">
             <label for="origen">Origen:</label>
-            <input type="text" id="origen" placeholder="Ej. Cúcuta" required>
+            <input type="text" id="origen" name="origen" placeholder="Ej. Cúcuta" required>
           </div>
           <div class="form-group">
             <label for="destino">Destino:</label>
-            <input type="text" id="destino" placeholder="Ej. Bogotá" required>
+            <input type="text" id="destino" name="destino" placeholder="Ej. Bogotá" required>
           </div>
           <div class="form-group">
             <label for="peso">Peso (kg):</label>
-            <input type="number" id="peso" step="0.1" placeholder="Ej. 2.5" required>
+            <input type="number" id="peso" name="peso" step="0.1" placeholder="Ej. 2.5" required>
           </div>
           <div class="form-group">
             <label for="dimensiones">Dimensiones (cm):</label>
-            <input type="text" id="dimensiones" placeholder="Ej. 30x20x15" required>
+            <input type="text" id="dimensiones" name="dimensiones" placeholder="Ej. 30x20x15" required>
           </div>
           <div class="form-group">
             <label for="servicio">Tipo de servicio:</label>
-            <select id="servicio" required>
+            <select id="servicio" name="servicio" required>
               <option value="paqueteo">Paqueteo</option>
               <option value="mensajeria">Mensajería Express</option>
               <option value="masivo">Carga Masiva</option>
@@ -93,11 +97,11 @@
         <form id="calculoForm" style="margin-top: 1rem;">
           <div class="form-group">
             <label for="calc-peso">Peso Estimado (kg):</label>
-            <input type="number" id="calc-peso" step="0.1" placeholder="Ej. 5.0" required>
+            <input type="number" id="calc-peso" name="calc-peso" step="0.1" placeholder="Ej. 5.0" required>
           </div>
           <div class="form-group">
             <label for="calc-servicio">Tipo de Servicio:</label>
-            <select id="calc-servicio" required>
+            <select id="calc-servicio" name="calc-servicio" required>
               <option value="estandar">Estándar Nacional</option>
               <option value="expres">Express Prioritario</option>
             </select>
@@ -116,4 +120,5 @@
   </footer>
 
 </body>
+
 </html>
