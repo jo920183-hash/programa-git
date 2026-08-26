@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (registroForm) {
     registroForm.addEventListener('submit', async (e) => {
+      // Evita la recarga predeterminada del navegador
       e.preventDefault();
 
       const formData = new FormData(registroForm);
