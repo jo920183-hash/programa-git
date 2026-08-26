@@ -107,3 +107,44 @@ window.onclick = function(event) {
     modal.style.display = 'none';
   }
 };
+// Manejo de la consulta/rastreo de guía
+document.addEventListener('DOMContentLoaded', () => {
+  const rastreoForm = document.getElementById('rastreoForm');
+  const trackingResult = document.getElementById('trackingResult');
+
+  if (rastreoForm) {
+    rastreoForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const guia = document.getElementById('guiaInput').value.trim();
+
+      if (!guia) return;
+
+      fetch(`consultar_guia.php?numero_guia=${encodeURIComponent(guia)}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            trackingResult.innerHTML = `
+              <div style="margin-top: 1rem; padding: 1rem; background-color: #e8f5e9; border-radius: 6px; border: 1px solid #c8e6c9;">
+                <h4 style="color: #2e7d32; margin-bottom: 0.5rem;">📦 Estado del Envío</h4>
+                <p><strong>Guía:</strong> ${data.numero_guia}</p>
+                <p><strong>Ruta:</strong> ${data.origen} ➔ ${data.destino}</p>
+                <p><strong>Servicio:</strong> ${data.servicio}</p>
+               <p><strong>Estado:</strong> <span style="background-color: #1b5e20; color: #ffffff; font-weight: bold; padding: 4px 10px; border-radius: 4px; display: inline-block;">${data.estado || 'Recibido en Bodega'}</span></p>
+                <p><strong>Fecha de Envío:</strong> ${data.fecha}</p>
+              </div>
+            `;
+          } else {
+            trackingResult.innerHTML = `
+              <div style="margin-top: 1rem; padding: 1rem; background-color: #ffebee; border-radius: 6px; border: 1px solid #ffcdd2; color: #c62828;">
+                ⚠️ ${data.message}
+              </div>
+            `;
+          }
+        })
+        .catch(error => {
+          console.error("Error al consultar la guía:", error);
+          trackingResult.innerHTML = `<p style="color: red; margin-top: 1rem;">Error de conexión con el servidor.</p>`;
+        });
+    });
+  }
+});
