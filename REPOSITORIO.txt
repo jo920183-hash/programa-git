@@ -1,4 +1,4 @@
-EVIDENCIA: GA7-220501096-AA2-EV01 - Codificación de módulos del software
+EVIDENCIA: Codificación de módulos del software stand-alone, web y móvil. GA7-220501096-AA3
 APRENDIZ: José Isauro Ortiz Vergel
 PROGRAMA: Análisis y Desarrollo de Software (ADSO) - SENA
 
