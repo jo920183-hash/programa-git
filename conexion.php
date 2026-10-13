@@ -1,6 +1,6 @@
 <?php
 $host     = "127.0.0.1";
-$port     = 3307; 
+$port     = 3307; // Puerto de MySQL en XAMPP
 $user     = "root";
 $password = "";
 $database = "condor_db";

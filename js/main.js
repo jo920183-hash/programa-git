@@ -1,49 +1,83 @@
 // Transportes Cóndor - Core App Logic
 
-// LocalStorage Shipping Management
-const Storage = {
-  getShipments: () => JSON.parse(localStorage.getItem('condor_envios')) || [],
-  saveShipment: (shipment) => {
-    const shipments = Storage.getShipments();
-    shipments.push(shipment);
-    localStorage.setItem('condor_envios', JSON.stringify(shipments));
-  },
-  findShipment: (guideNumber) => {
-    const shipments = Storage.getShipments();
-    return shipments.find(s => s.guia.toUpperCase() === guideNumber.toUpperCase());
+document.addEventListener('DOMContentLoaded', () => {
+
+  // ==========================================
+  // 1. REGISTRO DE USUARIOS (Conexión a PHP)
+  // ==========================================
+  const registroForm = document.getElementById('registroForm');
+  const registroAlert = document.getElementById('registroAlert');
+
+  if (registroForm) {
+    registroForm.addEventListener('submit', async (e) => {
+      // Evita la recarga predeterminada del navegador
+      e.preventDefault();
+
+      const formData = new FormData(registroForm);
+
+      try {
+        const response = await fetch('procesar_registro.php', {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.json();
+
+        if (registroAlert) {
+          registroAlert.style.display = 'block';
+          registroAlert.textContent = result.message;
+
+          if (result.success) {
+            registroAlert.className = 'alert alert-success';
+            registroForm.reset();
+          } else {
+            registroAlert.className = 'alert alert-danger';
+          }
+        }
+      } catch (error) {
+        console.error('Error en el registro:', error);
+        if (registroAlert) {
+          registroAlert.style.display = 'block';
+          registroAlert.className = 'alert alert-danger';
+          registroAlert.textContent = 'Ocurrió un error al procesar la solicitud. Revisa la consola o conexión BD.';
+        }
+      }
+    });
   }
-};
 
-// Seed initial mock shipments if empty
-if (Storage.getShipments().length === 0) {
-  const initialShipments = [
-    {
-      guia: "TC-1001",
-      origen: "Cúcuta",
-      destino: "Bogotá",
-      peso: 5,
-      dimensiones: "30x20x15",
-      servicio: "paqueteo",
-      costo: 35000,
-      estado: "En Tránsito",
-      fecha: "2026-08-19"
-    },
-    {
-      guia: "TC-1002",
-      origen: "Medellín",
-      destino: "Cali",
-      peso: 12,
-      dimensiones: "40x40x30",
-      servicio: "masivo",
-      costo: 78000,
-      estado: "Entregado",
-      fecha: "2026-08-18"
-    }
-  ];
-  localStorage.setItem('condor_envios', JSON.stringify(initialShipments));
-}
+  // ==========================================
+  // 2. INICIO DE SESIÓN (Conexión a PHP)
+  // ==========================================
+  const loginForm = document.getElementById('loginForm');
+  if (loginForm) {
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-// Modal handling for Points of Sale
+      const formData = new FormData(loginForm);
+
+      try {
+        const response = await fetch('procesar_login.php', {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.json();
+
+        alert(result.message);
+        if (result.success) {
+          window.location.href = 'index.html';
+        }
+      } catch (error) {
+        console.error('Error en el login:', error);
+      }
+    });
+  }
+
+});
+
+// ==========================================
+// 3. MODALES DE PUNTOS DE VENTA (Rutas)
+// ==========================================
 function showPointOfSale(city) {
   const modal = document.getElementById('cityModal');
   const modalTitle = document.getElementById('modalTitle');
@@ -66,13 +100,14 @@ function closeModal() {
   if (modal) modal.style.display = 'none';
 }
 
-// Close modal when clicking outside
+// Cerrar modal al hacer clic fuera del contenido
 window.onclick = function(event) {
   const modal = document.getElementById('cityModal');
   if (event.target === modal) {
     modal.style.display = 'none';
   }
 };
+<<<<<<< HEAD
 
 /* ==========================================================================
    CONEXIÓN DE FORMULARIOS AL BACKEND PHP (BD condor_db)
@@ -203,4 +238,46 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+=======
+// Manejo de la consulta/rastreo de guía
+document.addEventListener('DOMContentLoaded', () => {
+  const rastreoForm = document.getElementById('rastreoForm');
+  const trackingResult = document.getElementById('trackingResult');
+
+  if (rastreoForm) {
+    rastreoForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const guia = document.getElementById('guiaInput').value.trim();
+
+      if (!guia) return;
+
+      fetch(`consultar_guia.php?numero_guia=${encodeURIComponent(guia)}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            trackingResult.innerHTML = `
+              <div style="margin-top: 1rem; padding: 1rem; background-color: #e8f5e9; border-radius: 6px; border: 1px solid #c8e6c9;">
+                <h4 style="color: #2e7d32; margin-bottom: 0.5rem;">📦 Estado del Envío</h4>
+                <p><strong>Guía:</strong> ${data.numero_guia}</p>
+                <p><strong>Ruta:</strong> ${data.origen} ➔ ${data.destino}</p>
+                <p><strong>Servicio:</strong> ${data.servicio}</p>
+               <p><strong>Estado:</strong> <span style="background-color: #1b5e20; color: #ffffff; font-weight: bold; padding: 4px 10px; border-radius: 4px; display: inline-block;">${data.estado || 'Recibido en Bodega'}</span></p>
+                <p><strong>Fecha de Envío:</strong> ${data.fecha}</p>
+              </div>
+            `;
+          } else {
+            trackingResult.innerHTML = `
+              <div style="margin-top: 1rem; padding: 1rem; background-color: #ffebee; border-radius: 6px; border: 1px solid #ffcdd2; color: #c62828;">
+                ⚠️ ${data.message}
+              </div>
+            `;
+          }
+        })
+        .catch(error => {
+          console.error("Error al consultar la guía:", error);
+          trackingResult.innerHTML = `<p style="color: red; margin-top: 1rem;">Error de conexión con el servidor.</p>`;
+        });
+    });
+  }
+>>>>>>> 96f08a423992a2b59912bcd2d77da07eef932804
 });
