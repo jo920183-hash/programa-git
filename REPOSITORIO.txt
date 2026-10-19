@@ -1,4 +1,4 @@
-EVIDENCIA: Codificación de módulos del software stand-alone, web y móvil. GA7-220501096-AA3
+EVIDENCIA: Evidencia GA7-220501096-AA5-EV01. Diseño y desarrollo de servicios web - caso.  
 APRENDIZ: José Isauro Ortiz Vergel
 PROGRAMA: Análisis y Desarrollo de Software (ADSO) - SENA
 
