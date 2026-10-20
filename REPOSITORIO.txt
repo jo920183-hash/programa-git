@@ -1,4 +1,4 @@
-EVIDENCIA: Evidencia GA7-220501096-AA5-EV01. Diseño y desarrollo de servicios web - caso.  
+EVIDENCIA: Evidencia GA7-220501096-AA5-EV02. API. 
 APRENDIZ: José Isauro Ortiz Vergel
 PROGRAMA: Análisis y Desarrollo de Software (ADSO) - SENA
 
